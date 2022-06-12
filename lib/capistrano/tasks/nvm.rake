@@ -28,6 +28,7 @@ namespace :nvm do
   task :wrapper do
     on release_roles(fetch(:nvm_roles)) do
       execute :mkdir, "-p", "#{fetch(:tmp_dir)}/#{fetch(:application)}/"
+      puts "DEBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUG DIBOUG"
       upload! StringIO.new("#!/bin/bash -e\ndate >> /tmp/laladebug\nwhoami >> /tmp/laladebug\npwd >> /tmp/laladebug\nsource \"#{fetch(:nvm_path)}/nvm.sh\"\nnvm use $NODE_VERSION\nexec \"$@\""), "#{fetch(:tmp_dir)}/#{fetch(:application)}/nvm-exec.sh"
       execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/nvm-exec.sh"
     end
